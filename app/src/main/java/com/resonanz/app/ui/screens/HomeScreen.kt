@@ -107,10 +107,10 @@ fun HomeScreen(
                             isSelectionMode = false
                             selectedSongIds = emptySet()
                         }) {
-                            Icon(Icons.Default.Close, "Abbrechen")
+                            Icon(Icons.Default.Close, "Cancel")
                         }
                         Text(
-                            text = "${selectedSongIds.size} ausgewählt",
+                            text = "${selectedSongIds.size} selected",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Medium
                         )
@@ -126,7 +126,7 @@ fun HomeScreen(
                         }) {
                             Icon(
                                 Icons.Default.SelectAll, 
-                                "Alle auswählen",
+                                "Select all",
                                 tint = if (selectedSongIds.size == filteredSongs.size) 
                                     MaterialTheme.colorScheme.primary 
                                 else 
@@ -151,7 +151,7 @@ fun HomeScreen(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Suchen...") },
+                placeholder = { Text("Search...") },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -243,7 +243,7 @@ fun HomeScreen(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "${selectedSongIds.size} Songs löschen",
+                        text = "Delete ${selectedSongIds.size} songs",
                         color = MaterialTheme.colorScheme.onErrorContainer,
                         fontWeight = FontWeight.Medium
                     )
@@ -256,8 +256,8 @@ fun HomeScreen(
     if (showBulkDeleteConfirm) {
         AlertDialog(
             onDismissRequest = { showBulkDeleteConfirm = false },
-            title = { Text("${selectedSongIds.size} Songs löschen?") },
-            text = { Text("Möchtest du die ausgewählten Songs wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.") },
+            title = { Text("Delete ${selectedSongIds.size} songs?") },
+            text = { Text("Do you really want to delete the selected songs? This action cannot be undone.") },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -270,12 +270,12 @@ fun HomeScreen(
                         isSelectionMode = false
                     }
                 ) {
-                    Text("Löschen", color = MaterialTheme.colorScheme.error)
+                    Text("Delete", color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showBulkDeleteConfirm = false }) {
-                    Text("Abbrechen")
+                    Text("Cancel")
                 }
             }
         )
@@ -393,7 +393,7 @@ fun SongItemWithMenu(
                 ) {
                     Icon(
                         imageVector = if (isSelected) Icons.Default.CheckCircle else Icons.Default.RadioButtonUnchecked,
-                        contentDescription = if (isSelected) "Ausgewählt" else "Nicht ausgewählt",
+                        contentDescription = if (isSelected) "Selected" else "Not selected",
                         tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(28.dp)
                     )
@@ -437,7 +437,7 @@ fun SongItemWithMenu(
                     IconButton(onClick = { showMenu = true }) {
                         Icon(
                             imageVector = Icons.Default.MoreVert,
-                            contentDescription = "Mehr",
+                            contentDescription = "More",
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
@@ -447,7 +447,7 @@ fun SongItemWithMenu(
                         onDismissRequest = { showMenu = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Zur Playlist hinzufügen") },
+                            text = { Text("Add to playlist") },
                             leadingIcon = { Icon(Icons.Default.PlaylistAdd, null) },
                             onClick = {
                                 showMenu = false
@@ -456,7 +456,7 @@ fun SongItemWithMenu(
                         )
                         if (onDelete != null) {
                             DropdownMenuItem(
-                                text = { Text("Löschen", color = MaterialTheme.colorScheme.error) },
+                                text = { Text("Delete", color = MaterialTheme.colorScheme.error) },
                                 leadingIcon = { 
                                     Icon(
                                         Icons.Default.Delete, 
@@ -480,8 +480,8 @@ fun SongItemWithMenu(
     if (showDeleteConfirm) {
         AlertDialog(
             onDismissRequest = { showDeleteConfirm = false },
-            title = { Text("Song löschen?") },
-            text = { Text("Möchtest du \"${song.title}\" wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.") },
+            title = { Text("Delete song?") },
+            text = { Text("Do you really want to delete \"${song.title}\"? This action cannot be undone.") },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -489,12 +489,12 @@ fun SongItemWithMenu(
                         onDelete?.invoke()
                     }
                 ) {
-                    Text("Löschen", color = MaterialTheme.colorScheme.error)
+                    Text("Delete", color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteConfirm = false }) {
-                    Text("Abbrechen")
+                    Text("Cancel")
                 }
             }
         )

@@ -55,7 +55,7 @@ fun SyncScreen(
                         fontWeight = FontWeight.Medium
                     )
                     Text(
-                        text = if (serverRunning) "Läuft" else "Gestoppt",
+                        text = if (serverRunning) "Running" else "Stopped",
                         color = if (serverRunning) 
                             MaterialTheme.colorScheme.primary 
                         else 
@@ -97,7 +97,7 @@ fun SyncScreen(
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text(
-                    text = "QR-Code scannen",
+                    text = "Scan QR Code",
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
             }
@@ -106,7 +106,7 @@ fun SyncScreen(
         Spacer(modifier = Modifier.height(24.dp))
         
         Text(
-            text = "Starte den Server und öffne die angezeigte URL im Browser auf deinem PC. Scanne dann den QR-Code um die Verbindung herzustellen.",
+            text = "Start the server and open the displayed URL in your PC's browser. Then scan the QR code to establish the connection.",
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 14.sp,
             lineHeight = 20.sp

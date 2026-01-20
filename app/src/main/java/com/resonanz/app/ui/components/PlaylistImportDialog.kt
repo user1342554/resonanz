@@ -38,7 +38,7 @@ fun PlaylistImportDialog(
                     state.error != null -> {
                         // Error state
                         Text(
-                            text = "❌ Fehler",
+                            text = "❌ Error",
                             style = MaterialTheme.typography.headlineSmall,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.error
@@ -56,14 +56,14 @@ fun PlaylistImportDialog(
                         Spacer(modifier = Modifier.height(24.dp))
                         
                         Button(onClick = onDismiss) {
-                            Text("Schließen")
+                            Text("Close")
                         }
                     }
                     
                     state.completed -> {
                         // Success state
                         Text(
-                            text = "✅ Import abgeschlossen",
+                            text = "✅ Import completed",
                             style = MaterialTheme.typography.headlineSmall,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
@@ -80,7 +80,7 @@ fun PlaylistImportDialog(
                         Spacer(modifier = Modifier.height(8.dp))
                         
                         Text(
-                            text = "${state.downloadedSongs} Songs importiert",
+                            text = "${state.downloadedSongs} songs imported",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -93,14 +93,14 @@ fun PlaylistImportDialog(
                                 containerColor = MaterialTheme.colorScheme.primary
                             )
                         ) {
-                            Text("Fertig")
+                            Text("Done")
                         }
                     }
                     
                     state.isImporting -> {
                         // Importing state
                         Text(
-                            text = "Playlist importieren",
+                            text = "Import Playlist",
                             style = MaterialTheme.typography.headlineSmall,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onSurface
@@ -158,7 +158,7 @@ fun PlaylistImportDialog(
                             Spacer(modifier = Modifier.height(16.dp))
                             
                             Text(
-                                text = "Verbinde...",
+                                text = "Connecting...",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )

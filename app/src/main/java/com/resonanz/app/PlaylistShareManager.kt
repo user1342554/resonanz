@@ -1,6 +1,7 @@
 package com.resonanz.app
 
 import android.content.Context
+import android.os.Environment
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,8 +27,11 @@ class PlaylistShareManager(private val context: Context) {
     private val _importState = MutableStateFlow(PlaylistImportState())
     val importState: StateFlow<PlaylistImportState> = _importState
     
+    // Use the same storage directory as MainActivity
     private val storageDir: File by lazy {
-        File(context.filesDir, "music").also { it.mkdirs() }
+        File(context.getExternalFilesDir(Environment.DIRECTORY_MUSIC), "Resonanz").also { 
+            if (!it.exists()) it.mkdirs() 
+        }
     }
     
     /**
@@ -95,12 +99,13 @@ class PlaylistShareManager(private val context: Context) {
                     
                     // Download the song
                     val downloadUrl = "$baseUrl/share/playlist/$playlistId/song/$songId"
-                    val success = downloadSong(downloadUrl, songTitle, songArtist)
+                    val downloadedFile = downloadSong(downloadUrl, songTitle, songArtist)
                     
-                    if (success) {
-                        // Use the filename as the song ID for the new playlist
-                        val fileName = sanitizeFileName("$songTitle - $songArtist") + ".mp3"
-                        importedSongIds.add(fileName)
+                    if (downloadedFile != null) {
+                        // Use the same song ID format as MainActivity: path hash code
+                        // This matches how loadSongsFromMediaStore() generates IDs for uploaded songs
+                        val newSongId = downloadedFile.absolutePath.hashCode().toString()
+                        importedSongIds.add(newSongId)
                     }
                 }
                 
@@ -125,7 +130,10 @@ class PlaylistShareManager(private val context: Context) {
         }
     }
     
-    private fun downloadSong(url: String, title: String, artist: String): Boolean {
+    /**
+     * Downloads a song and returns the File if successful, null otherwise
+     */
+    private fun downloadSong(url: String, title: String, artist: String): File? {
         return try {
             val connection = URL(url).openConnection() as HttpURLConnection
             connection.connectTimeout = 10000
@@ -133,16 +141,16 @@ class PlaylistShareManager(private val context: Context) {
             
             if (connection.responseCode != 200) {
                 Log.w("PlaylistShareManager", "Failed to download $title: ${connection.responseCode}")
-                return false
+                return null
             }
             
             val fileName = sanitizeFileName("$title - $artist") + ".mp3"
             val file = File(storageDir, fileName)
             
-            // Skip if file already exists
+            // Skip download if file already exists, but still return it
             if (file.exists()) {
                 Log.d("PlaylistShareManager", "Song already exists: $fileName")
-                return true
+                return file
             }
             
             connection.inputStream.use { input ->
@@ -152,10 +160,10 @@ class PlaylistShareManager(private val context: Context) {
             }
             
             Log.d("PlaylistShareManager", "Downloaded: $fileName")
-            true
+            file
         } catch (e: Exception) {
             Log.e("PlaylistShareManager", "Download error for $title", e)
-            false
+            null
         }
     }
     

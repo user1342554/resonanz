@@ -132,34 +132,6 @@ fun FullPlayer(
                             )
                         }
                     }
-                },
-                actions = {
-                    Row(
-                        modifier = Modifier.padding(end = 14.dp),
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(height = 42.dp, width = 50.dp)
-                                .clip(
-                                    RoundedCornerShape(
-                                        topStart = 6.dp,
-                                        topEnd = 50.dp,
-                                        bottomStart = 6.dp,
-                                        bottomEnd = 50.dp
-                                    )
-                                )
-                                .background(colors.onPrimary)
-                                .clickable { /* Queue */ },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_queue_music),
-                                contentDescription = "Queue",
-                                tint = colors.primary
-                            )
-                        }
-                    }
                 }
             )
         }

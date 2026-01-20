@@ -42,12 +42,6 @@ class PlayerViewModel : ViewModel() {
     private val _queueSourceName = MutableStateFlow("Now Playing")
     val queueSourceName: StateFlow<String> = _queueSourceName.asStateFlow()
 
-    // Device sync state
-    private val _activeDevice = MutableStateFlow("phone")
-    val activeDevice: StateFlow<String> = _activeDevice.asStateFlow()
-    
-    // When web is active, phone playback is paused but we track "virtual" playing state
-    private var wasPlayingBeforeWebTransfer = false
 
     // Callback for web sync
     var onStateChanged: ((String?, Boolean, Long, Long, List<String>, Boolean, Int) -> Unit)? = null
@@ -219,54 +213,6 @@ class PlayerViewModel : ViewModel() {
         }
     }
     
-    // ==================== DEVICE TRANSFER HANDLING ====================
-    
-    /**
-     * Called when playback should transfer to web.
-     * Pauses local playback but keeps state for web to continue.
-     */
-    fun transferToWeb() {
-        controller?.let {
-            wasPlayingBeforeWebTransfer = it.isPlaying
-            if (it.isPlaying) {
-                it.pause()
-            }
-        }
-        _activeDevice.value = "web"
-        // Keep updating state so web can track position
-    }
-    
-    /**
-     * Called when playback should transfer back to phone.
-     * Resumes playback from the provided position.
-     */
-    fun transferToPhone(positionMs: Long) {
-        _activeDevice.value = "phone"
-        controller?.let {
-            // Seek to the position and resume if it was playing
-            it.seekTo(positionMs)
-            if (wasPlayingBeforeWebTransfer || _stablePlayerState.value.isPlaying) {
-                it.play()
-            }
-        }
-        wasPlayingBeforeWebTransfer = false
-    }
-    
-    /**
-     * Update position from web when web is the active device.
-     * This keeps our state in sync with web playback.
-     */
-    fun updatePositionFromWeb(positionMs: Long) {
-        if (_activeDevice.value != "phone") {
-            _currentPosition.value = positionMs
-        }
-    }
-    
-    /**
-     * Check if phone is the active playback device.
-     */
-    fun isPhoneActive(): Boolean = _activeDevice.value == "phone"
-
     fun expandPlayer() {
         _sheetState.value = PlayerSheetState.EXPANDED
     }

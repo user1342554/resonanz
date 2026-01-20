@@ -40,7 +40,7 @@ fun PlaylistShareDialog(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Playlist teilen",
+                    text = "Share Playlist",
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
@@ -69,7 +69,7 @@ fun PlaylistShareDialog(
                     ) {
                         Image(
                             bitmap = bitmap.asImageBitmap(),
-                            contentDescription = "QR Code zum Teilen",
+                            contentDescription = "QR Code for sharing",
                             modifier = Modifier.fillMaxSize()
                         )
                     }
@@ -78,7 +78,7 @@ fun PlaylistShareDialog(
                 Spacer(modifier = Modifier.height(16.dp))
                 
                 Text(
-                    text = "Scanne diesen QR-Code mit der Resonanz App auf einem anderen Gerät",
+                    text = "Scan this QR code with the Resonanz App on another device",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
@@ -94,7 +94,7 @@ fun PlaylistShareDialog(
                     ),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Schließen")
+                    Text("Close")
                 }
             }
         }

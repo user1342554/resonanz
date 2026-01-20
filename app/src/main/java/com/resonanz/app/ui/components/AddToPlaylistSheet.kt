@@ -57,7 +57,7 @@ fun AddToPlaylistSheet(
             Column(modifier = Modifier.fillMaxSize()) {
                 // Header
                 Text(
-                    text = "Zu Playlist hinzufügen",
+                    text = "Add to Playlist",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
@@ -95,7 +95,7 @@ fun AddToPlaylistSheet(
                 OutlinedTextField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
-                    placeholder = { Text("Playlist suchen...") },
+                    placeholder = { Text("Search playlists...") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 8.dp),
@@ -136,7 +136,7 @@ fun AddToPlaylistSheet(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "Neue Playlist erstellen",
+                            text = "Create new playlist",
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -222,9 +222,9 @@ fun AddToPlaylistSheet(
                 shape = CircleShape,
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
-                Icon(Icons.Rounded.Save, "Speichern")
+                Icon(Icons.Rounded.Save, "Save")
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Speichern")
+                Text("Save")
             }
         }
     }
@@ -261,7 +261,7 @@ fun CreatePlaylistDialog(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = "Neue Playlist",
+                    text = "New Playlist",
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 16.dp)
@@ -271,7 +271,7 @@ fun CreatePlaylistDialog(
                     value = playlistName,
                     onValueChange = { playlistName = it },
                     label = { Text("Name") },
-                    placeholder = { Text("Meine Playlist") },
+                    placeholder = { Text("My Playlist") },
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -284,7 +284,7 @@ fun CreatePlaylistDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text("Abbrechen")
+                        Text("Cancel")
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                     Button(
@@ -296,7 +296,7 @@ fun CreatePlaylistDialog(
                         enabled = playlistName.isNotBlank(),
                         shape = RoundedCornerShape(16.dp)
                     ) {
-                        Text("Erstellen")
+                        Text("Create")
                     }
                 }
             }

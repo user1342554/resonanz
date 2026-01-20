@@ -136,7 +136,7 @@ fun PlaylistDetailScreen(
                             containerColor = MaterialTheme.colorScheme.surfaceVariant
                         )
                     ) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Zurück")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
                     }
                     
                     Spacer(modifier = Modifier.width(16.dp))
@@ -163,7 +163,7 @@ fun PlaylistDetailScreen(
                             containerColor = MaterialTheme.colorScheme.surfaceVariant
                         )
                     ) {
-                        Icon(Icons.Default.Edit, "Bearbeiten")
+                        Icon(Icons.Default.Edit, "Edit")
                     }
                     
                     // Delete button
@@ -173,7 +173,7 @@ fun PlaylistDetailScreen(
                             containerColor = MaterialTheme.colorScheme.surfaceVariant
                         )
                     ) {
-                        Icon(Icons.Default.Delete, "Löschen")
+                        Icon(Icons.Default.Delete, "Delete")
                     }
                 }
             }
@@ -452,8 +452,8 @@ fun PlaylistDetailScreen(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Playlist löschen?") },
-            text = { Text("Bist du sicher, dass du \"${playlist.name}\" löschen möchtest?") },
+            title = { Text("Delete playlist?") },
+            text = { Text("Are you sure you want to delete \"${playlist.name}\"?") },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -461,12 +461,12 @@ fun PlaylistDetailScreen(
                         showDeleteDialog = false
                     }
                 ) {
-                    Text("Löschen", color = MaterialTheme.colorScheme.error)
+                    Text("Delete", color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text("Abbrechen")
+                    Text("Cancel")
                 }
             }
         )
@@ -548,7 +548,7 @@ private fun PlaylistSongItem(
                 IconButton(onClick = onRemoveClick) {
                     Icon(
                         Icons.Default.RemoveCircleOutline,
-                        "Entfernen",
+                        "Remove",
                         tint = MaterialTheme.colorScheme.error
                     )
                 }
@@ -568,12 +568,12 @@ private fun RenamePlaylistDialog(
     
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Playlist umbenennen") },
+        title = { Text("Rename playlist") },
         text = {
             OutlinedTextField(
                 value = newName,
                 onValueChange = { newName = it },
-                label = { Text("Neuer Name") },
+                label = { Text("New name") },
                 shape = RoundedCornerShape(16.dp),
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
@@ -584,12 +584,12 @@ private fun RenamePlaylistDialog(
                 onClick = { if (newName.isNotBlank()) onRename(newName) },
                 enabled = newName.isNotBlank() && newName != currentName
             ) {
-                Text("Umbenennen")
+                Text("Rename")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Abbrechen")
+                Text("Cancel")
             }
         }
     )
@@ -627,7 +627,7 @@ fun AddSongsToPlaylistSheet(
         Column(modifier = Modifier.fillMaxSize()) {
             // Header
             Text(
-                text = "Songs hinzufügen",
+                text = "Add songs",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
@@ -637,7 +637,7 @@ fun AddSongsToPlaylistSheet(
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                placeholder = { Text("Songs suchen...") },
+                placeholder = { Text("Search songs...") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp),
@@ -730,7 +730,7 @@ fun AddSongsToPlaylistSheet(
                 ) {
                     Icon(Icons.Rounded.Check, null)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Hinzufügen")
+                    Text("Add")
                 }
             }
         }

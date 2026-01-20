@@ -199,7 +199,7 @@ fun LibraryScreen(
                             Text(
                                 text = when (tab) {
                                     LibraryTab.SONGS -> "Songs"
-                                    LibraryTab.ALBUMS -> "Alben"
+                                    LibraryTab.ALBUMS -> "Albums"
                                     LibraryTab.ARTISTS -> "Artists"
                                     LibraryTab.PLAYLISTS -> "Playlists"
                                 }
@@ -328,7 +328,7 @@ fun LibraryScreen(
         
         AlertDialog(
             onDismissRequest = { showCreateDialog = false },
-            title = { Text("Neue Playlist") },
+            title = { Text("New Playlist") },
             text = {
                 OutlinedTextField(
                     value = playlistName,
@@ -346,12 +346,12 @@ fun LibraryScreen(
                         }
                     }
                 ) {
-                    Text("Erstellen")
+                    Text("Create")
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showCreateDialog = false }) {
-                    Text("Abbrechen")
+                    Text("Cancel")
                 }
             }
         )
@@ -499,7 +499,7 @@ fun PlaylistItem(
                 ) {
                     Icon(
                         Icons.Default.PlayArrow,
-                        contentDescription = "Abspielen"
+                        contentDescription = "Play"
                     )
                 }
             }
@@ -509,7 +509,7 @@ fun PlaylistItem(
                 IconButton(onClick = { showMenu = true }) {
                     Icon(
                         Icons.Default.MoreVert,
-                        contentDescription = "Mehr",
+                        contentDescription = "More",
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -519,7 +519,7 @@ fun PlaylistItem(
                     onDismissRequest = { showMenu = false }
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Teilen") },
+                        text = { Text("Share") },
                         leadingIcon = { Icon(Icons.Default.Share, null) },
                         onClick = {
                             showMenu = false
@@ -527,7 +527,7 @@ fun PlaylistItem(
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Löschen") },
+                        text = { Text("Delete") },
                         leadingIcon = { 
                             Icon(
                                 Icons.Default.Delete, 

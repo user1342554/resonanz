@@ -363,7 +363,10 @@ class MainActivity : ComponentActivity() {
                             onShufflePlaylist = { playlist, playlistSongs ->
                                 if (playlistSongs.isNotEmpty()) {
                                     playerViewModel.playSong(playlistSongs.random(), playlistSongs, playlist.name)
-                                    playerViewModel.toggleShuffle()
+                                    // Only enable shuffle if not already enabled (don't toggle off)
+                                    if (!isShuffleEnabled) {
+                                        playerViewModel.toggleShuffle()
+                                    }
                                 }
                             },
                             onSharePlaylist = { playlist ->
@@ -661,14 +664,6 @@ class MainActivity : ComponentActivity() {
                         "shuffle" -> MusicService.instance?.toggleShuffle()
                         "repeat" -> MusicService.instance?.toggleRepeat()
                         
-                        // Device transfer commands
-                        "transferToWeb" -> {
-                            playerViewModelRef?.transferToWeb()
-                        }
-                        "transferToPhone" -> {
-                            val position = data as? Long ?: 0L
-                            playerViewModelRef?.transferToPhone(position)
-                        }
                     }
                 }
             }
